@@ -42,7 +42,6 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-  console.log(context.query);
   return {
     props: { ...context.query }, // will be passed to the page component as props
   };

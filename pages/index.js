@@ -161,6 +161,7 @@ export default function Home() {
         photos={photos}
         renderImage={(props) => (
           <Image
+            style={{ cursor: "pointer" }}
             src={props.photo}
             alt={props.photo}
             onClick={() => handleClick(props.photo.src)}
