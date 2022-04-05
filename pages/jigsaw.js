@@ -2,11 +2,23 @@ import { JigsawPuzzle } from "react-jigsaw-puzzle/lib";
 import "react-jigsaw-puzzle/lib/jigsaw-puzzle.css";
 import { useRouter } from "next/router";
 
-export default function Home() {
+export default function Home(props) {
   const router = useRouter();
-  const { url, rows, columns } = router.query;
+  const { url } = props;
+  const rows = parseInt(props.rows) || 6;
+  const columns = parseInt(props.columns) || 6;
+
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        alignContent: "center",
+        textAlign: "center",
+      }}
+    >
+      <h2>HAKI PUZZLE</h2>
       <JigsawPuzzle
         imageSrc={url}
         rows={rows && rows > 0 ? rows : 6}
@@ -14,6 +26,24 @@ export default function Home() {
         onSolved={() => alert("Solved!")}
         className="jigsaw-puzzle"
       />
+      <button
+        style={{ marginTop: "10px" }}
+        onClick={() => {
+          router.push({
+            pathname: "/",
+            query: { rows, columns },
+          });
+        }}
+      >
+        Back
+      </button>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  console.log(context.query);
+  return {
+    props: { ...context.query }, // will be passed to the page component as props
+  };
 }

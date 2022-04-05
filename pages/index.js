@@ -112,19 +112,32 @@ export default function Home() {
     },
   ];
   const router = useRouter();
+  const {
+    query: { rows, columns },
+  } = router;
   const handleClick = (url) => {
     const rows = document.getElementById("rows").value;
     const columns = document.getElementById("columns").value;
     console.log(rows);
-    router.push(`jigsaw?url=${url}?rows=${rows}?columns=${columns}`);
+    router.push(`jigsaw?url=${url}&rows=${rows}&columns=${columns}`);
   };
 
   return (
-    <>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        alignContent: "center",
+        textAlign: "center",
+      }}
+    >
+      <h2>HAKI PUZZLE</h2>
       <div style={{ paddingBottom: "20px" }}>
         <div style={{ fontSize: "20px" }}>
           Rows
           <input
+            defaultValue={rows}
             id="rows"
             style={{ marginLeft: "10px" }}
             type="text"
@@ -135,6 +148,7 @@ export default function Home() {
         <div style={{ fontSize: "20px" }}>
           Column
           <input
+            defaultValue={columns}
             id="columns"
             style={{ marginLeft: "10px" }}
             type="text"
@@ -153,7 +167,6 @@ export default function Home() {
           />
         )}
       />
-      ;
-    </>
+    </div>
   );
 }
